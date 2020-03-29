@@ -13,11 +13,18 @@ public class CarriesItem : MonoBehaviour
         }
     }
     
+    public CarryItem TakeItem() {
+        var item = ItemSlot?.GetComponentsInChildren<CarryItem>().FirstOrDefault();
+        item.transform.SetParent(null); 
+        return item;
+    }
+
     public CarryItem Item {
         get {
             return ItemSlot?.GetComponentsInChildren<CarryItem>().FirstOrDefault();
         }
         set {
+            value.transform.position = ItemSlot.transform.position;
             value.transform.parent = ItemSlot.transform;
         }
     }

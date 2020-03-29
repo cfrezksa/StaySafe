@@ -10,9 +10,11 @@ public enum ItemType
     Pasta,
     ToiletPaper,
     Meal,
+    Delivery,
 }
 
 public class CarryItem : MonoBehaviour
 {
     public ItemType ItemType;
+    public float Usage = 0.0f;
 }

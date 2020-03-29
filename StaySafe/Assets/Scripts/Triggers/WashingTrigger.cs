@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WashingTrigger : Trigger
 {
-
+    public AudioClip WashingClip;
     void Start() {
         Combo = "Y";
     }
@@ -21,6 +21,12 @@ public class WashingTrigger : Trigger
         var h = obj.GetComponent<HealthState>();
         h.Health = Mathf.Min(1.0f, h.Health + 0.2f);
         Combo = combos[Random.Range(0, combos.Length)];
+
+        if ((GetComponent<AudioSource>() is AudioSource src) && (WashingClip != null)) {
+            if (!src.isPlaying) {
+                src.PlayOneShot(WashingClip);
+            }
+        }
     }
 
     private string[] combos = new string[] { "A", "B", "X", "Y" };

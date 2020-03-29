@@ -7,7 +7,6 @@ public class TriggerInteraction : MonoBehaviour
 {
     public PlayerTypes PlayerType;
     public SpriteRenderer sprite;
-    Trigger[] AllTriggers;
 
     public Sprite[] ComboSprites;
     public List<string> TextureCombos;
@@ -18,7 +17,6 @@ public class TriggerInteraction : MonoBehaviour
         if (sprite != null) sprite.enabled = false;
         ComboSystem cs = GetComponent<ComboSystem>();
         if (cs != null) cs.OnCombo += OnCombo;
-        AllTriggers = FindObjectsOfType<Trigger>();
     }
 
     private void OnCombo(object sender, string combo) {
@@ -31,6 +29,7 @@ public class TriggerInteraction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        var AllTriggers = FindObjectsOfType<Trigger>();
         Vector2 P = this.transform.position.ToPlane();
         ActiveTrigger = AllTriggers
             .Where(x => x.IsTaskFor(PlayerType))

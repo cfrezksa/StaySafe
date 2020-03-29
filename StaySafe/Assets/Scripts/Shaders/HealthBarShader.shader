@@ -5,6 +5,7 @@
 		_Health ("Health", Float) = 0.0
 		_HealthyColor("Healty Color", Color) = (0.0, 1.0, 0.0, 1.0)
 		_UnhealthyColor("Unhealthy Color", Color) = (1.0, 0.0, 0.0, 1.0)
+		_BackgroundColor("Background", Color) = (1.0, 1.0, 1.0, 1.0)
     }
     SubShader
     {
@@ -34,7 +35,8 @@
             };
 
 			float4 _HealthyColor;
-			float4 _UnhealthyColor;
+			float4 _UnhealthyColor; 
+			float4 _BackgroundColor;
 			float _Health;
 
             v2f vert (appdata v)
@@ -55,7 +57,7 @@
 					result = _Health * _HealthyColor + (1.0 - _Health) * _UnhealthyColor;;
 				}
 				else {
-					result = float4(0.9, 0.9, 0.9, 1);
+					result = _BackgroundColor;
 				}
 
 				result *= smoothstep(0.0, 0.03, i.uv.x);
